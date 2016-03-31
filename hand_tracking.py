@@ -82,12 +82,13 @@ def hand(img):
     hull = cv2.convexHull(cnt,returnPoints = False)
     defects = cv2.convexityDefects(cnt,hull)
     rect = cv2.minAreaRect(cnt)
+    """
     if rect is not None:    
         if z_cali is True:
             focalLength = (rect[1][0] * KNOWN_DISTANCE) / KNOWN_WIDTH
         if z_cali is False:
             inches = distance_to_camera(KNOWN_WIDTH, focalLength, rect[1][0])
-          
+    """      
     box = cv2.cv.BoxPoints(rect)
     box = np.int0(box)
     if defects is None:
@@ -113,12 +114,12 @@ def hand(img):
     cv2.drawContours(origImage,[cnt],0,(0,255,0),2)
 
     cv2.putText(origImage,str(fingers),(40,150), font, 6 ,(255,0,255),2)
-    cv2.putText(origImage,"x= "+ str(cx)+ " y= "+ str(cy) + " z= "+str(inches),(cx,cy), font, 0.5 ,(255,0,0),2)
+    cv2.putText(origImage,"x= "+ str(cx)+ " y= "+ str(cy), font, 0.5 ,(255,0,0),2)
     cv2.circle(origImage,(cx-10,cy+10),10,[0,0,255],-1)
-    cv2.setMouseCallback("image",calibrateZ)
+    #cv2.setMouseCallback("image",calibrateZ)
     cv2.imshow("image",origImage)
    
-    return index_val+1,cx,cy,inches
+    return index_val+1,cx,cy#,inches
 
 def distance_to_camera(knownWidth, focalLength, perWidth):
 	# compute and return the distance from the maker to the camera
