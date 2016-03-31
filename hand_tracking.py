@@ -114,7 +114,7 @@ def hand(img):
     cv2.drawContours(origImage,[cnt],0,(0,255,0),2)
 
     cv2.putText(origImage,str(fingers),(40,150), font, 6 ,(255,0,255),2)
-    cv2.putText(origImage,"x= "+ str(cx)+ " y= "+ str(cy), font, 0.5 ,(255,0,0),2)
+    #cv2.putText(origImage,"x= "+ str(cx)+ " y= "+ str(cy), font, 0.5 ,(255,0,0),2)
     cv2.circle(origImage,(cx-10,cy+10),10,[0,0,255],-1)
     #cv2.setMouseCallback("image",calibrateZ)
     cv2.imshow("image",origImage)
@@ -133,7 +133,7 @@ while 1:
     if img is None:
           continue
     if hand(img) is not None:
-           fin,camx,camy,camz = hand(img)
+           fin,camx,camy = hand(img)
      
            x  = max(min(xMax,camx+300),0)
            y  = max(min(yMax,camy+300),0)
